@@ -1,0 +1,797 @@
+-- =====================================================
+-- SQL Project: Data-Driven Employee Analytics System
+-- =====================================================
+CREATE DATABASE Data_Driven_Employee_Analytics_System;
+USE Data_Driven_Employee_Analytics_System;
+
+-- 1. SCHEMA CREATION:-
+
+-- 1.1 Departments Table:
+CREATE TABLE departments (
+    dept_id INT PRIMARY KEY AUTO_INCREMENT,
+    dept_name VARCHAR(50) UNIQUE NOT NULL,
+    head_id INT DEFAULT 'NULL',
+    kpi_target VARCHAR(255)
+);
+
+-- ALTER TABLE departments MODIFY COLUMN head_id INT DEFAULT NULL
+
+INSERT INTO departments (dept_id, dept_name, head_id, kpi_target) VALUES
+(1, 'Department_1', '23', 'Matrix revolutionary e-business'),
+(2, 'Department_2', '45', 'Seize granular infrastructures'),
+(3, 'Department_3', '67', 'Deploy cross-platform vortals'),
+(4, 'Department_4', '23', 'Re-intermediate end-to-end partnerships'),
+(5, 'Department_5', '14', 'Re-intermediate cross-media roi');
+SELECT * FROM departments;
+
+-- 1.2 Employees Table
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    dept_id INT,
+    hire_date DATE,
+    salary DECIMAL(10, 2),
+    is_active BOOLEAN,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+);
+
+INSERT INTO employees (emp_id, first_name, last_name, dept_id, hire_date, salary, is_active) VALUES
+(1, 'Keya', 'Sawhney', 1, '2015-04-13', 118986.06, 0),
+(2, 'Shanaya', 'Bir', 2, '2016-07-25', 118376.55, 0),
+(3, 'Hridaan', 'Khalsa', 5, '2019-09-25', 33813.92, 0),
+(4, 'Alisha', 'Sani', 2, '2017-08-10', 90642.63, 0),
+(5, 'Onkar', 'Uppal', 5, '2017-03-25', 115922.35, 1),
+(6, 'Aaryahi', 'Master', 2, '2020-01-14', 100711.88, 0),
+(7, 'Alisha', 'Bhatnagar', 2, '2022-10-30', 80713.73, 1),
+(8, 'Nirvi', 'Acharya', 2, '2017-05-31', 144865.57, 1),
+(9, 'Bhavin', 'Khatri', 1, '2016-01-15', 75591.28, 1),
+(10, 'Dhanuk', 'Baral', 3, '2021-10-08', 61742.5, 0),
+(11, 'Pari', 'Ganesan', 4, '2021-01-05', 44979.14, 1),
+(12, 'Zara', 'Warrior', 1, '2021-03-11', 65181.39, 1),
+(13, 'Kanav', 'Gokhale', 5, '2017-02-26', 114548.62, 0),
+(14, 'Drishya', 'Sampath', 2, '2023-09-02', 64726.56, 0),
+(15, 'Navya', 'Ravi', 2, '2016-02-18', 75615.15, 1),
+(16, 'Shlok', 'Buch', 3, '2016-10-28', 74421.72, 0),
+(17, 'Trisha', 'Bawa', 3, '2022-11-14', 142398.55, 0),
+(18, 'Ranbir', 'Grewal', 5, '2022-02-13', 50536.64, 0),
+(19, 'Drishya', 'Lad', 2, '2020-03-08', 75534.65, 0),
+(20, 'Siya', 'Bandi', 3, '2023-08-14', 123119.99, 0),
+(21, 'Manjari', 'Balay', 1, '2018-07-16', 78139.77, 0),
+(22, 'Anika', 'Borah', 2, '2021-05-12', 135164.12, 1),
+(23, 'Shanaya', 'Wable', 2, '2022-05-08', 89907.75, 1),
+(24, 'Diya', 'Gara', 2, '2017-12-20', 46755.64, 1),
+(25, 'Devansh', 'Kanda', 5, '2019-10-21', 137738.75, 1),
+(26, 'Taimur', 'Garde', 3, '2017-06-17', 149679.09, 0),
+(27, 'Azad', 'Cheema', 5, '2020-07-14', 40909.13, 0),
+(28, 'Tarini', 'Ganesh', 1, '2016-09-18', 105293.53, 1),
+(29, 'Eva', 'Arya', 5, '2015-09-18', 76172.08, 1),
+(30, 'Saksham', 'Sangha', 5, '2017-10-26', 146529.41, 0),
+(31, 'Tanya', 'Bose', 1, '2022-08-24', 136174.61, 1),
+(32, 'Parinaaz', 'Maharaj', 3, '2016-04-01', 65220.02, 0),
+(33, 'Aaina', 'Bahl', 4, '2015-01-14', 144457.91, 1),
+(34, 'Aayush', 'Gaba', 5, '2023-07-18', 51438.23, 0),
+(35, 'Ojas', 'Sagar', 3, '2022-03-02', 90919.55, 0),
+(36, 'Farhan', 'Gara', 2, '2019-03-12', 121501.3, 0),
+(37, 'Misha', 'Shenoy', 5, '2018-08-20', 88632.68, 0),
+(38, 'Diya', 'Ramanathan', 3, '2018-06-13', 58734.28, 0),
+(39, 'Piya', 'Biswas', 5, '2015-11-19', 40278.41, 1),
+(40, 'Ishita', 'Sengupta', 1, '2023-07-13', 93924.74, 0),
+(41, 'Kavya', 'Gara', 2, '2022-05-26', 87033.89, 0),
+(42, 'Vardaniya', 'Loyal', 3, '2020-12-01', 134691.96, 1),
+(43, 'Riya', 'Korpal', 2, '2021-01-17', 120631.82, 0),
+(44, 'Yasmin', 'Shankar', 3, '2019-06-23', 149417.92, 1),
+(45, 'Lavanya', 'Goda', 4, '2020-10-20', 84178.34, 0),
+(46, 'Hridaan', 'Char', 2, '2015-09-20', 70570.27, 0),
+(47, 'Vanya', 'Badal', 5, '2017-06-21', 30862.9, 0),
+(48, 'Anahita', 'Boase', 2, '2015-10-04', 138650.4, 1),
+(49, 'Aarush', 'Dubey', 1, '2020-10-06', 58560.56, 1),
+(50, 'Yuvraj ', 'Aurora', 2, '2021-01-17', 45877.42, 1),
+(51, 'Manikya', 'Hans', 2, '2023-10-19', 86756.75, 1),
+(52, 'Manikya', 'Hari', 2, '2016-01-22', 41631.7, 1),
+(53, 'Devansh', 'Kamdar', 3, '2019-10-01', 79332.27, 0),
+(54, 'Anahi', 'Ahuja', 1, '2015-09-06', 78314.55, 1),
+(55, 'Abram', 'Bhandari', 1, '2017-10-15', 52990.81, 1),
+(56, 'Samar', 'Bhatnagar', 2, '2019-09-25', 52018.56, 1),
+(57, 'Parinaaz', 'Mane', 2, '2015-11-05', 83175.69, 0),
+(58, 'Ela', 'Banik', 1, '2022-04-25', 149913.9, 0),
+(59, 'Ishita', 'Sani', 1, '2023-06-14', 131843.49, 0),
+(60, 'Nitya', 'Sheth', 4, '2020-06-12', 87763.01, 1),
+(61, 'Seher', 'Chaudhari', 1, '2016-11-05', 75476.77, 1),
+(62, 'Saksham', 'Varkey', 3, '2023-10-17', 124215.52, 1),
+(63, 'Rania', 'Hayer', 4, '2022-10-24', 144878.12, 1),
+(64, 'Ryan', 'Bedi', 2, '2017-02-16', 65604.94, 0),
+(65, 'Pranay', 'Garg', 5, '2023-04-02', 95063.42, 1),
+(66, 'Sara', 'Jain', 1, '2015-07-25', 100101.31, 0),
+(67, 'Ranbir', 'Apte', 1, '2020-09-11', 39613.38, 0),
+(68, 'Gokul', 'Anne', 1, '2021-09-03', 38155.3, 0),
+(69, 'Mishti', 'Buch', 4, '2016-05-06', 142991.54, 0),
+(70, 'Sumer', 'Magar', 5, '2021-09-01', 34769.0, 0),
+(71, 'Kismat', 'Balakrishnan', 4, '2022-05-16', 100040.67, 1),
+(72, 'Kiara', 'Jani', 3, '2017-04-16', 110367.12, 1),
+(73, 'Charvi', 'Arora', 2, '2017-12-23', 77494.3, 1),
+(74, 'Aarav', 'Bose', 4, '2018-07-19', 141482.2, 0),
+(75, 'Keya', 'Bassi', 1, '2020-02-21', 104539.11, 0),
+(76, 'Kashvi', 'Wadhwa', 1, '2021-01-11', 55578.52, 1),
+(77, 'Tarini', 'Karnik', 2, '2018-11-30', 135703.7, 0),
+(78, 'Nirvi', 'Shere', 3, '2018-03-13', 48929.62, 1),
+(79, 'Ojas', 'Hayre', 5, '2022-05-02', 93472.88, 1),
+(80, 'Jiya', 'Sule', 1, '2016-07-04', 61735.91, 0),
+(81, 'Elakshi', 'Ramanathan', 5, '2016-09-28', 62681.79, 0),
+(82, 'Divit', 'Dutt', 3, '2017-04-13', 112499.66, 1),
+(83, 'Miraan', 'Vig', 5, '2020-06-24', 60134.55, 0),
+(84, 'Emir', 'Kara', 1, '2022-02-11', 80829.09, 1),
+(85, 'Neysa', 'Karnik', 1, '2015-01-15', 70026.78, 0),
+(86, 'Madhav', 'Keer', 3, '2016-10-23', 118947.71, 1),
+(87, 'Yashvi', 'Mangal', 5, '2015-02-09', 43424.87, 0),
+(88, 'Saanvi', 'Cherian', 5, '2015-05-28', 130151.4, 0),
+(89, 'Jayesh', 'Singhal', 4, '2016-06-06', 35019.46, 1),
+(90, 'Nitya', 'Deshpande', 1, '2019-01-05', 55209.18, 0),
+(91, 'Aaina', 'Sachar', 1, '2018-12-19', 123613.95, 1),
+(92, 'Anahita', 'Anne', 5, '2023-05-28', 48546.4, 0),
+(93, 'Sumer', 'Ram', 2, '2023-12-21', 127292.61, 1),
+(94, 'Tejas', 'Jani', 1, '2017-01-04', 118387.74, 1),
+(95, 'Kavya', 'Kothari', 4, '2023-12-30', 110388.86, 0),
+(96, 'Prisha', 'Lalla', 3, '2016-10-14', 124484.94, 0),
+(97, 'Manikya', 'Sani', 4, '2015-06-08', 133031.19, 0),
+(98, 'Shray', 'Gokhale', 2, '2020-02-29', 71959.01, 0),
+(99, 'Fateh', 'Babu', 2, '2015-04-07', 109203.98, 1),
+(100, 'Aayush', 'Dave', 3, '2018-02-15', 133722.35, 1);
+SELECT * FROM employees;
+
+-- 1.3 Projects Table
+CREATE TABLE projects (
+    project_id INT PRIMARY KEY AUTO_INCREMENT,
+    project_name VARCHAR(100),
+    dept_id INT,
+    start_date DATE,
+    end_date DATE,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+);
+
+INSERT INTO projects (project_id, project_name, dept_id, start_date, end_date) VALUES
+(1, 'Project_1', 5, '2018-12-09', '2019-12-02'),
+(2, 'Project_2', 3, '2019-06-26', '2020-04-25'),
+(3, 'Project_3', 3, '2015-04-24', '2015-07-22'),
+(4, 'Project_4', 3, '2017-01-01', '2017-11-24'),
+(5, 'Project_5', 5, '2015-06-06', '2015-08-30'),
+(6, 'Project_6', 3, '2019-11-15', '2020-06-08'),
+(7, 'Project_7', 5, '2019-11-23', '2020-10-28'),
+(8, 'Project_8', 5, '2016-04-18', '2016-12-01'),
+(9, 'Project_9', 1, '2017-02-17', '2017-07-27'),
+(10, 'Project_10', 1, '2022-12-13', '2023-08-23'),
+(11, 'Project_11', 2, '2020-10-30', '2021-08-31'),
+(12, 'Project_12', 1, '2019-01-31', '2019-10-08'),
+(13, 'Project_13', 5, '2022-06-13', '2022-12-29'),
+(14, 'Project_14', 3, '2018-07-09', '2018-10-10'),
+(15, 'Project_15', 4, '2020-09-08', '2021-03-15'),
+(16, 'Project_16', 3, '2018-08-29', '2019-04-22'),
+(17, 'Project_17', 2, '2021-03-20', '2021-06-23'),
+(18, 'Project_18', 2, '2019-09-19', '2020-04-30'),
+(19, 'Project_19', 3, '2021-11-26', '2022-10-13'),
+(20, 'Project_20', 1, '2019-07-22', '2020-05-27');
+SELECT * FROM projects;
+
+-- 1.4 Employee_Project Mapping Table
+CREATE TABLE employee_projects (
+    emp_id INT,
+    project_id INT,
+    assigned_on DATE,
+    PRIMARY KEY (emp_id, project_id),
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id),
+    FOREIGN KEY (project_id) REFERENCES projects(project_id)
+);
+
+INSERT INTO employee_projects (emp_id, project_id, assigned_on) VALUES
+(11, 10, '2020-10-12'),
+(15, 15, '2016-04-26'),
+(16, 7, '2018-07-16'),
+(20, 19, '2018-05-29'),
+(27, 7, '2017-12-19'),
+(28, 15, '2022-11-05'),
+(29, 9, '2019-11-21'),
+(3, 20, '2016-09-16'),
+(3, 9, '2021-06-18'),
+(30, 9, '2023-11-01'),
+(32, 10, '2022-06-12'),
+(36, 14, '2018-10-24'),
+(39, 13, '2019-09-13'),
+(4, 3, '2017-07-26'),
+(40, 20, '2023-05-26'),
+(40, 8, '2017-03-26'),
+(42, 4, '2023-08-31'),
+(43, 11, '2022-07-07'),
+(44, 13, '2018-02-13'),
+(45, 8, '2022-04-16'),
+(46, 9, '2018-10-26'),
+(51, 19, '2021-04-30'),
+(53, 15, '2022-09-24'),
+(54, 19, '2017-03-07'),
+(56, 19, '2018-01-04'),
+(57, 15, '2022-07-30'),
+(57, 3, '2023-01-01'),
+(58, 6, '2023-05-05'),
+(59, 3, '2022-09-16'),
+(59, 5, '2019-11-19'),
+(6, 14, '2023-03-28'),
+(60, 6, '2015-07-25'),
+(61, 15, '2017-11-27'),
+(66, 5, '2015-10-13'),
+(67, 7, '2015-12-17'),
+(68, 20, '2018-03-05'),
+(70, 8, '2022-04-06'),
+(73, 10, '2019-12-04'),
+(73, 20, '2015-09-04'),
+(8, 7, '2019-09-17'),
+(84, 11, '2020-03-19'),
+(85, 18, '2020-03-07'),
+(90, 17, '2020-03-17'),
+(97, 16, '2022-01-05'),
+(97, 8, '2022-02-24');
+SELECT * FROM employee_projects;
+
+-- 1.5 Performance Reviews Table
+CREATE TABLE performance_reviews (
+    review_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_id INT,
+    review_date DATE,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    reviewer VARCHAR(100),
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+);
+
+INSERT INTO performance_reviews (review_id, emp_id, review_date, rating, reviewer) VALUES
+(1, 37, '2023-02-21', 3, 'Nitara Jhaveri'),
+(2, 76, '2021-07-03', 4, 'Mamooty Mall'),
+(3, 20, '2020-01-04', 5, 'Jayesh Bhavsar'),
+(4, 62, '2018-11-14', 3, 'Riya Dutt'),
+(5, 71, '2023-07-22', 5, 'Reyansh Bhargava'),
+(6, 49, '2020-02-09', 3, 'Madhav Halder'),
+(7, 25, '2022-10-27', 2, 'Shalv Dar'),
+(8, 74, '2019-04-18', 2, 'Eva Banerjee'),
+(9, 100, '2019-08-10', 1, 'Fateh Majumdar'),
+(10, 41, '2023-05-09', 4, 'Ayesha Sundaram'),
+(11, 91, '2019-04-11', 4, 'Indranil Bassi'),
+(12, 85, '2023-11-20', 2, 'Neysa Saxena'),
+(13, 64, '2015-06-01', 2, 'Yuvraj  Talwar'),
+(14, 65, '2021-08-14', 3, 'Hazel Hayer'),
+(15, 13, '2019-12-09', 1, 'Vidur Samra'),
+(16, 68, '2020-02-15', 1, 'Renee Wason'),
+(17, 93, '2016-08-13', 4, 'Adira Thaker'),
+(18, 84, '2016-09-24', 1, 'Farhan Atwal'),
+(19, 61, '2023-10-07', 3, 'Sana Comar'),
+(20, 44, '2021-12-27', 4, 'Adah Deol'),
+(21, 84, '2015-11-25', 3, 'Kanav Deep'),
+(22, 87, '2020-12-25', 4, 'Hridaan Tailor'),
+(23, 41, '2022-01-11', 4, 'Alisha Mand'),
+(24, 70, '2015-05-28', 5, 'Nehmat Sridhar'),
+(25, 9, '2017-08-19', 3, 'Hrishita Apte'),
+(26, 30, '2023-05-17', 1, 'Krish Kale'),
+(27, 56, '2016-02-08', 1, 'Vivaan Sule'),
+(28, 57, '2016-11-12', 3, 'Aayush Mall'),
+(29, 4, '2015-07-08', 3, 'Ela Raman'),
+(30, 8, '2018-04-16', 3, 'Abram Saini'),
+(31, 48, '2019-10-31', 2, 'Dishani Sarna'),
+(32, 32, '2020-12-15', 4, 'Mamooty Mann'),
+(33, 73, '2022-08-24', 2, 'Manikya Shere'),
+(34, 22, '2016-12-18', 1, 'Indrajit Dada'),
+(35, 79, '2019-04-16', 5, 'Advika Badami'),
+(36, 88, '2017-09-13', 4, 'Mamooty Koshy'),
+(37, 75, '2016-08-09', 2, 'Baiju Balakrishnan'),
+(38, 60, '2022-02-25', 3, 'Nayantara Badal'),
+(39, 59, '2017-11-11', 1, 'Taran Guha'),
+(40, 60, '2018-03-24', 5, 'Suhana Sem'),
+(41, 21, '2015-10-30', 4, 'Veer Som'),
+(42, 45, '2021-08-03', 3, 'Aarush Tella'),
+(43, 82, '2019-10-04', 3, 'Lagan Maharaj'),
+(44, 59, '2018-05-22', 2, 'Anahita Dara'),
+(45, 50, '2020-06-02', 1, 'Navya Kalla'),
+(46, 31, '2019-04-12', 5, 'Manikya Chauhan'),
+(47, 46, '2021-06-12', 3, 'Saksham Kothari'),
+(48, 90, '2018-04-24', 1, 'Dhanuk Sant'),
+(49, 85, '2019-06-10', 3, 'Rania Aurora'),
+(50, 2, '2021-05-07', 1, 'Kiara Sachdev'),
+(51, 78, '2023-05-11', 4, 'Veer Tandon'),
+(52, 37, '2023-09-13', 2, 'Jivika Hari'),
+(53, 78, '2023-12-29', 3, 'Yuvaan Mand'),
+(54, 29, '2022-02-20', 2, 'Dharmajan Wagle'),
+(55, 80, '2017-10-23', 2, 'Vritika Balan'),
+(56, 81, '2016-02-02', 1, 'Badal Subramanian'),
+(57, 40, '2023-11-05', 4, 'Baiju Kara'),
+(58, 5, '2021-07-01', 3, 'Hiran Hari'),
+(59, 94, '2016-06-22', 1, 'Ishita Shenoy'),
+(60, 38, '2018-08-31', 4, 'Arnav Lal'),
+(61, 23, '2017-04-02', 2, 'Chirag Rama'),
+(62, 70, '2019-02-07', 5, 'Stuvan Sabharwal'),
+(63, 65, '2018-01-21', 2, 'Akarsh Randhawa'),
+(64, 33, '2020-05-27', 3, 'Kismat Bobal'),
+(65, 96, '2018-10-19', 1, 'Arhaan Borde'),
+(66, 60, '2015-11-05', 2, 'Amani Goel'),
+(67, 97, '2017-07-13', 4, 'Keya Loke'),
+(68, 72, '2019-02-07', 1, 'Shaan Dave'),
+(69, 51, '2015-02-27', 3, 'Raghav Karan'),
+(70, 69, '2016-05-21', 4, 'Mannat Suri'),
+(71, 48, '2022-07-18', 3, 'Faiyaz Bose'),
+(72, 75, '2019-04-10', 3, 'Devansh Mane'),
+(73, 14, '2022-07-27', 2, 'Samaira Mangal'),
+(74, 61, '2015-04-13', 5, 'Piya Sood'),
+(75, 72, '2018-09-05', 5, 'Saira Sankar'),
+(76, 29, '2022-04-06', 1, 'Jivin Dutt'),
+(77, 82, '2020-03-16', 3, 'Tara Seth'),
+(78, 84, '2019-07-31', 1, 'Lavanya Sachar'),
+(79, 18, '2015-07-05', 1, 'Dharmajan Sridhar'),
+(80, 39, '2020-07-10', 1, 'Alisha Kurian'),
+(81, 13, '2017-08-19', 5, 'Anahita Yogi'),
+(82, 18, '2019-05-11', 4, 'Kismat Rattan'),
+(83, 48, '2022-07-09', 5, 'Hansh Bawa'),
+(84, 54, '2021-08-02', 2, 'Elakshi Mannan'),
+(85, 54, '2022-05-06', 1, 'Rohan Cherian'),
+(86, 63, '2021-11-26', 4, 'Adira Chandran'),
+(87, 36, '2015-05-15', 3, 'Umang Kumer'),
+(88, 28, '2019-12-22', 4, 'Azad Mand'),
+(89, 31, '2019-01-25', 1, 'Alia Dave'),
+(90, 88, '2019-02-13', 5, 'Darshit Kumar'),
+(91, 83, '2019-01-09', 1, 'Kiara Butala'),
+(92, 51, '2018-02-04', 2, 'Saanvi Kulkarni'),
+(93, 16, '2020-02-06', 1, 'Ishaan Brahmbhatt'),
+(94, 85, '2017-05-18', 5, 'Uthkarsh Kohli'),
+(95, 3, '2015-07-27', 3, 'Dhruv Dutt'),
+(96, 32, '2016-05-30', 5, 'Samarth Mahal'),
+(97, 27, '2015-10-09', 5, 'Renee Rao'),
+(98, 27, '2021-07-29', 2, 'Umang Agrawal'),
+(99, 30, '2018-09-07', 2, 'Aarna Keer'),
+(100, 77, '2015-01-12', 3, 'Charvi Rattan'),
+(101, 19, '2016-06-16', 5, 'Charvi Karpe'),
+(102, 33, '2023-12-15', 2, 'Romil Subramaniam'),
+(103, 15, '2022-05-31', 1, 'Misha Gara'),
+(104, 17, '2015-03-02', 3, 'Tarini Wagle'),
+(105, 31, '2021-08-08', 3, 'Saira Subramaniam'),
+(106, 3, '2016-12-14', 3, 'Mahika Wali'),
+(107, 7, '2016-06-03', 4, 'Jayant Dass'),
+(108, 68, '2016-04-10', 1, 'Myra Deshpande'),
+(109, 61, '2020-01-11', 3, 'Renee Sethi'),
+(110, 66, '2021-08-28', 1, 'Zaina Sarraf'),
+(111, 58, '2020-08-25', 2, 'Kaira Ramanathan'),
+(112, 79, '2015-06-27', 5, 'Kavya Shenoy'),
+(113, 39, '2020-02-20', 1, 'Shayak Kar'),
+(114, 8, '2020-05-15', 4, 'Shray Bhatt'),
+(115, 55, '2022-09-11', 1, 'Jayant Srivastava'),
+(116, 63, '2022-12-27', 4, 'Nehmat Sekhon'),
+(117, 10, '2015-11-27', 3, 'Aaryahi Biswas'),
+(118, 78, '2016-08-30', 1, 'Adira Jha'),
+(119, 17, '2018-01-31', 5, 'Veer Samra'),
+(120, 82, '2021-07-25', 5, 'Bhavin Savant'),
+(121, 92, '2018-08-24', 4, 'Tiya Dara'),
+(122, 77, '2020-12-13', 3, 'Prisha Gade'),
+(123, 59, '2020-09-01', 5, 'Jivin Datta'),
+(124, 56, '2016-02-11', 1, 'Kanav Saran'),
+(125, 84, '2022-04-20', 5, 'Hansh Gill'),
+(126, 93, '2017-05-30', 4, 'Saanvi Sankar'),
+(127, 58, '2017-07-24', 4, 'Shamik Bava'),
+(128, 44, '2020-02-01', 4, 'Rania Sandhu'),
+(129, 54, '2023-03-08', 1, 'Shayak Bumb'),
+(130, 41, '2019-10-15', 3, 'Jayan Dass'),
+(131, 86, '2017-11-10', 3, 'Sumer Sethi'),
+(132, 20, '2022-09-14', 4, 'Elakshi Yohannan'),
+(133, 9, '2016-01-09', 1, 'Sara Barman'),
+(134, 12, '2019-11-04', 1, 'Pari Lata'),
+(135, 96, '2023-04-15', 3, 'Shalv Sodhi'),
+(136, 17, '2021-03-28', 1, 'Dhanush Walla'),
+(137, 76, '2021-04-19', 5, 'Manikya Behl'),
+(138, 43, '2022-07-07', 1, 'Armaan Sama'),
+(139, 53, '2018-12-19', 4, 'Priyansh Som'),
+(140, 93, '2015-07-30', 3, 'Farhan Sane'),
+(141, 77, '2018-07-03', 3, 'Mehul Gara'),
+(142, 14, '2021-06-25', 5, 'Shanaya Solanki'),
+(143, 28, '2016-09-25', 4, 'Vidur Andra'),
+(144, 29, '2016-03-19', 3, 'Zain Bhakta'),
+(145, 72, '2019-02-14', 1, 'Dhruv Gour'),
+(146, 98, '2018-02-15', 5, 'Stuvan Sathe'),
+(147, 29, '2019-10-24', 5, 'Dishani Badami'),
+(148, 99, '2021-12-21', 5, 'Miraan Kale'),
+(149, 87, '2022-03-17', 5, 'Nitya Kaur'),
+(150, 4, '2021-10-30', 3, 'Kaira Baral');
+SELECT * FROM performance_reviews;
+
+-- 1.6 Salaries History Table
+CREATE TABLE salaries (
+    salary_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_id INT,
+    salary DECIMAL(10, 2),
+    updated_on DATE,
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+);
+ALTER TABLE salaries MODIFY COLUMN salary DECIMAL(10, 1);
+
+INSERT INTO salaries (salary_id, emp_id, salary, updated_on) VALUES
+(1, 1, 33474.38, '2018-01-24'),
+(2, 2, 114323.85, '2018-06-19'),
+(3, 3, 140584.5, '2018-12-08'),
+(4, 4, 30732.69, '2024-10-02'),
+(5, 5, 47190.18, '2022-05-16'),
+(6, 6, 78094.12, '2016-08-04'),
+(7, 7, 118916.29, '2015-05-06'),
+(8, 8, 41010.92, '2020-12-12'),
+(9, 9, 55815.95, '2019-09-16'),
+(10, 10, 84437.49, '2016-10-06'),
+(11, 11, 74406.37, '2023-02-03'),
+(12, 12, 68925.95, '2021-05-13'),
+(13, 13, 101546.85, '2024-11-27'),
+(14, 14, 36313.06, '2016-10-06'),
+(15, 15, 120532.31, '2015-07-23'),
+(16, 16, 110876.25, '2018-01-19'),
+(17, 17, 83173.56, '2019-10-03'),
+(18, 18, 88279.4, '2019-12-16'),
+(19, 19, 79702.05, '2017-06-01'),
+(20, 20, 120593.18, '2016-04-11'),
+(21, 21, 71420.74, '2016-03-30'),
+(22, 22, 63989.58, '2022-08-11'),
+(23, 23, 101176.11, '2020-11-28'),
+(24, 24, 110055.91, '2015-07-06'),
+(25, 25, 56462.21, '2021-09-20'),
+(26, 26, 36573.84, '2017-04-17'),
+(27, 27, 66170.32, '2017-05-15'),
+(28, 28, 122081.94, '2023-07-28'),
+(29, 29, 60662.34, '2018-09-05'),
+(30, 30, 44398.12, '2020-07-30'),
+(31, 31, 119641.69, '2016-12-20'),
+(32, 32, 45502.28, '2020-12-21'),
+(33, 33, 114440.55, '2020-08-11'),
+(34, 34, 97046.83, '2022-06-29'),
+(35, 35, 126744.02, '2015-10-23'),
+(36, 36, 77648.54, '2023-04-28'),
+(37, 37, 35076.27, '2015-03-18'),
+(38, 38, 85170.51, '2015-11-15'),
+(39, 39, 133453.2, '2021-06-16'),
+(40, 40, 81514.11, '2019-07-15'),
+(41, 41, 115139.88, '2019-09-07'),
+(42, 42, 64741.82, '2019-07-18'),
+(43, 43, 32502.79, '2018-08-23'),
+(44, 44, 50624.78, '2021-12-06'),
+(45, 45, 85211.63, '2022-09-25'),
+(46, 46, 140372.37, '2015-12-27'),
+(47, 47, 82405.41, '2016-03-09'),
+(48, 48, 59197.98, '2021-08-09'),
+(49, 49, 78053.98, '2015-11-19'),
+(50, 50, 77492.0, '2018-06-24'),
+(51, 51, 119496.58, '2017-06-26'),
+(52, 52, 69968.23, '2016-11-19'),
+(53, 53, 39165.53, '2022-02-06'),
+(54, 54, 43683.2, '2020-09-19'),
+(55, 55, 53268.44, '2023-09-15'),
+(56, 56, 71925.03, '2023-02-27'),
+(57, 57, 144986.8, '2022-03-28'),
+(58, 58, 127804.44, '2017-08-25'),
+(59, 59, 42336.54, '2017-11-14'),
+(60, 60, 53672.62, '2021-10-03'),
+(61, 61, 48344.37, '2023-07-07'),
+(62, 62, 108661.08, '2016-12-26'),
+(63, 63, 144155.06, '2022-01-16'),
+(64, 64, 89294.04, '2023-06-18'),
+(65, 65, 97648.26, '2021-07-01'),
+(66, 66, 83868.63, '2025-05-13'),
+(67, 67, 135845.78, '2022-03-18'),
+(68, 68, 106235.8, '2022-01-02'),
+(69, 69, 68784.99, '2022-01-13'),
+(70, 70, 67936.67, '2019-12-07'),
+(71, 71, 38194.35, '2019-12-17'),
+(72, 72, 105766.21, '2023-12-06'),
+(73, 73, 62960.84, '2015-08-19'),
+(74, 74, 72233.07, '2015-10-31'),
+(75, 75, 67248.94, '2020-01-26'),
+(76, 76, 34512.87, '2019-02-19'),
+(77, 77, 129803.6, '2015-11-11'),
+(78, 78, 107359.98, '2024-08-04'),
+(79, 79, 40835.58, '2021-08-30'),
+(80, 80, 90848.14, '2020-03-10'),
+(81, 81, 99639.53, '2023-11-18'),
+(82, 82, 118670.53, '2015-06-18'),
+(83, 83, 83968.04, '2024-01-31'),
+(84, 84, 98598.8, '2017-02-10'),
+(85, 85, 68583.21, '2020-05-02'),
+(86, 86, 90164.08, '2015-09-11'),
+(87, 87, 84062.77, '2024-02-04'),
+(88, 88, 137895.22, '2018-11-07'),
+(89, 89, 147886.27, '2015-12-12'),
+(90, 90, 90545.88, '2016-12-07'),
+(91, 91, 34697.06, '2022-12-08'),
+(92, 92, 82530.99, '2019-12-05'),
+(93, 93, 92888.23, '2021-11-02'),
+(94, 94, 49049.54, '2019-03-08'),
+(95, 95, 140152.41, '2019-05-06'),
+(96, 96, 79052.33, '2018-10-17'),
+(97, 97, 111467.73, '2015-08-03'),
+(98, 98, 124707.23, '2022-04-05'),
+(99, 99, 70157.92, '2018-09-12'),
+(100, 100, 41340.71, '2022-08-10');
+SELECT * FROM salaries;
+
+-- 1.7 Recruitment Table
+CREATE TABLE recruitment (
+    recruit_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_id INT,
+    position VARCHAR(100),
+    recruited_on DATE,
+    recruiter VARCHAR(100),
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+);
+
+INSERT INTO recruitment (recruit_id, emp_id, position, recruited_on, recruiter) VALUES
+(1, 1, 'Associate Professor', '2019-05-03', 'Kaira Mallick'),
+(2, 2, 'Marine scientist', '2018-03-09', 'Biju Sengupta'),
+(3, 3, 'Dentist', '2017-10-29', 'Aaryahi Zachariah'),
+(4, 4, 'Magazine features editor', '2023-02-12', 'Ayesha Goel'),
+(5, 5, 'Corporate treasurer', '2024-07-20', 'Armaan Venkatesh'),
+(6, 6, 'Surveyor, insurance', '2022-05-13', 'Keya Chand'),
+(7, 7, 'Metallurgist', '2025-03-01', 'Dhanuk Shetty'),
+(8, 8, 'Control and instrumentation engineer', '2021-10-04', 'Yakshit Bali'),
+(9, 9, 'Forensic psychologist', '2024-10-16', 'Piya Chaudhuri'),
+(10, 10, 'Health promotion specialist', '2016-09-07', 'Zain Kanda'),
+(11, 11, 'Legal secretary', '2018-09-27', 'Ivan Ramachandran'),
+(12, 12, 'Psychologist, forensic', '2015-11-30', 'Ishaan Anne'),
+(13, 13, 'Technical author', '2021-07-14', 'Ira Chawla'),
+(14, 14, 'Quarry manager', '2022-06-11', 'Neysa Krishnan'),
+(15, 15, 'Medical technical officer', '2016-08-02', 'Anaya Gupta'),
+(16, 16, 'Sub', '2025-04-12', 'Aaryahi Master'),
+(17, 17, 'Writer', '2018-12-03', 'Seher Krishnamurthy'),
+(18, 18, 'Teacher, English as a foreign language', '2018-06-24', 'Jivika Kala'),
+(19, 19, 'Medical physicist', '2022-05-11', 'Romil Ravi'),
+(20, 20, 'Research officer, trade union', '2022-10-31', 'Vedika Khurana'),
+(21, 21, 'Armed forces training and education officer', '2022-06-05', 'Nayantara Chowdhury'),
+(22, 22, 'Journalist, newspaper', '2019-05-25', 'Hansh Chaudhary'),
+(23, 23, 'Teacher, secondary school', '2016-06-12', 'Uthkarsh Atwal'),
+(24, 24, 'Psychologist, clinical', '2021-09-03', 'Armaan Gera'),
+(25, 25, 'Newspaper journalist', '2022-12-13', 'Shlok Ratti'),
+(26, 26, 'Nature conservation officer', '2025-07-09', 'Seher Balasubramanian'),
+(27, 27, 'Landscape architect', '2015-12-14', 'Armaan Swamy'),
+(28, 28, 'Dispensing optician', '2018-06-22', 'Miraya Bhavsar'),
+(29, 29, 'Adult nurse', '2021-04-08', 'Ehsaan Devan'),
+(30, 30, 'Engineer, land', '2019-03-23', 'Tiya Dada'),
+(31, 31, 'Clinical biochemist', '2022-03-20', 'Manjari Rastogi'),
+(32, 32, 'Purchasing manager', '2023-11-17', 'Nirvaan Dora'),
+(33, 33, 'Programmer, systems', '2018-09-07', 'Misha Barman'),
+(34, 34, 'Furniture conservator/restorer', '2024-02-13', 'Vardaniya Madan'),
+(35, 35, 'Orthoptist', '2016-06-07', 'Vihaan Verma'),
+(36, 36, 'Advertising art director', '2022-07-07', 'Misha Sharma'),
+(37, 37, 'Accounting technician', '2022-11-18', 'Bhavin Setty'),
+(38, 38, 'Psychologist, educational', '2024-04-18', 'Sahil Rout'),
+(39, 39, 'Garment/textile technologist', '2023-04-15', 'Mamooty Shetty'),
+(40, 40, 'Chartered public finance accountant', '2022-09-08', 'Rati Lala'),
+(41, 41, 'Fashion designer', '2025-03-26', 'Neelofar Batta'),
+(42, 42, 'Horticulturist, amenity', '2020-11-26', 'Romil Mahal'),
+(43, 43, 'Seismic interpreter', '2016-01-18', 'Siya Rout'),
+(44, 44, 'Lighting technician, broadcasting/film/video', '2022-03-31', 'Azad Iyengar'),
+(45, 45, 'Artist', '2022-07-09', 'Urvi Bhatia'),
+(46, 46, 'Intelligence analyst', '2019-10-01', 'Kanav Bahl'),
+(47, 47, 'Advertising art director', '2020-09-13', 'Anahita Rana'),
+(48, 48, 'Administrator', '2019-01-22', 'Yakshit Sathe'),
+(49, 49, 'Solicitor, Scotland', '2015-03-16', 'Baiju Venkatesh'),
+(50, 50, 'Designer, furniture', '2019-01-25', 'Lakshay Sahni'),
+(51, 51, 'Police officer', '2018-06-19', 'Pranay Kala'),
+(52, 52, 'Production designer, theatre/television/film', '2017-01-08', 'Nitya Kashyap'),
+(53, 53, 'Textile designer', '2017-05-27', 'Akarsh Lata'),
+(54, 54, 'Investment banker, corporate', '2018-10-31', 'Vidur Wable'),
+(55, 55, 'Health and safety adviser', '2023-08-05', 'Keya Shere'),
+(56, 56, 'Translator', '2020-06-14', 'Yashvi Issac'),
+(57, 57, 'Photographer', '2017-02-25', 'Armaan Jhaveri'),
+(58, 58, 'Social researcher', '2017-07-16', 'Nakul Rau'),
+(59, 59, 'Arts development officer', '2016-07-17', 'Lakshay Basu'),
+(60, 60, 'Accountant, chartered public finance', '2016-09-26', 'Nakul Ramachandran'),
+(61, 61, 'Learning disability nurse', '2015-11-13', 'Aradhya Bawa'),
+(62, 62, 'Corporate treasurer', '2018-04-26', 'Rohan Sarna'),
+(63, 63, 'Patent examiner', '2024-06-20', 'Alisha Sidhu'),
+(64, 64, 'Psychologist, clinical', '2023-11-03', 'Kaira Sangha'),
+(65, 65, 'Armed forces operational officer', '2016-02-19', 'Dhanuk Bali'),
+(66, 66, 'Press photographer', '2020-09-10', 'Veer Bhatti'),
+(67, 67, 'Production assistant, radio', '2023-08-24', 'Shaan Banik'),
+(68, 68, 'Charity fundraiser', '2021-01-19', 'Vritika Malhotra'),
+(69, 69, 'Web designer', '2024-05-13', 'Ahana  Kale'),
+(70, 70, 'Primary school teacher', '2023-04-14', 'Mehul Kata'),
+(71, 71, 'Herbalist', '2024-11-28', 'Nehmat Barad'),
+(72, 72, 'Lobbyist', '2020-11-26', 'Shayak Sarraf'),
+(73, 73, 'Teacher, English as a foreign language', '2015-06-04', 'Arnav Ratti'),
+(74, 74, 'Programmer, multimedia', '2022-06-04', 'Charvi Chaudhuri'),
+(75, 75, 'Dealer', '2018-10-11', 'Taran Hegde'),
+(76, 76, 'Research officer, government', '2024-10-29', 'Onkar Char'),
+(77, 77, 'Scientist, research (maths)', '2023-08-05', 'Jivin Rastogi'),
+(78, 78, 'Retail merchandiser', '2021-12-06', 'Sahil Madan'),
+(79, 79, 'Buyer, industrial', '2016-06-20', 'Indrans Gera'),
+(80, 80, 'Teacher, special educational needs', '2021-09-12', 'Tanya Gade'),
+(81, 81, 'Environmental education officer', '2019-03-24', 'Shalv Setty'),
+(82, 82, 'Nurse, mental health', '2016-09-23', 'Sahil Raj'),
+(83, 83, 'Psychotherapist', '2016-10-26', 'Siya Bera'),
+(84, 84, 'Advertising account executive', '2017-01-10', 'Anvi Setty'),
+(85, 85, 'Music tutor', '2024-04-28', 'Anya Bumb'),
+(86, 86, 'Designer, graphic', '2022-10-08', 'Darshit Samra'),
+(87, 87, 'Mechanical engineer', '2023-08-25', 'Rati Mannan'),
+(88, 88, 'Visual merchandiser', '2022-01-02', 'Lavanya Kant'),
+(89, 89, 'Air cabin crew', '2024-01-27', 'Pihu Barad'),
+(90, 90, 'Furniture conservator/restorer', '2025-02-14', 'Indrajit Sharaf'),
+(91, 91, 'Health service manager', '2016-11-09', 'Ojas Reddy'),
+(92, 92, 'Producer, television/film/video', '2023-02-01', 'Divij Jhaveri'),
+(93, 93, 'Geophysicist/field seismologist', '2019-11-28', 'Farhan D’Alia'),
+(94, 94, 'Designer, jewellery', '2015-06-28', 'Kashvi Rana'),
+(95, 95, 'Sales executive', '2019-08-10', 'Tushar Chakrabarti'),
+(96, 96, 'Engineer, chemical', '2019-02-01', 'Nayantara Kunda'),
+(97, 97, 'Insurance risk surveyor', '2022-08-02', 'Ryan Chaudhuri'),
+(98, 98, 'Lexicographer', '2023-01-26', 'Dishani Anne'),
+(99, 99, 'Print production planner', '2017-08-30', 'Kanav Zacharia'),
+(100, 100, 'Development worker, community', '2019-12-25', 'Priyansh Bhatnagar');
+SELECT * FROM recruitment;
+
+-- 1.8 Turnover Table
+CREATE TABLE turnover (
+    turnover_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_id INT,
+    exit_date DATE,
+    reason VARCHAR(255),
+    rehired BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+);
+
+INSERT INTO turnover (turnover_id, emp_id, exit_date, reason, rehired) VALUES
+(1, 79, '2018-03-13', 'Left due to better career opportunities.', 1),
+(2, 30, '2020-12-27', 'Personal reasons and work-life balance concerns.', 0),
+(3, 40, '2024-01-26', 'Resigned to pursue further education.', 1),
+(4, 25, '2019-02-15', 'Departed due to organizational restructuring.', 1),
+(5, 60, '2023-08-18', 'Left due to job-related stress and workload.', 1),
+(6, 100, '2019-04-14', 'Contract ended and was not renewed.', 1),
+(7, 21, '2024-02-28', 'Terminated due to performance issues.', 0),
+(8, 78, '2016-07-20', 'Resigned for family relocation.', 1),
+(9, 7, '2022-03-11', 'Left for a position with higher compensation.', 1),
+(10, 48, '2021-03-21', 'Resigned due to lack of growth opportunities.', 0),
+(11, 92, '2024-06-26', 'Position eliminated due to budget cuts.', 0),
+(12, 37, '2015-12-10', 'Voluntarily left to start own business.', 0),
+(13, 35, '2020-01-15', 'Retired from professional career.', 0),
+(14, 56, '2016-01-11', 'Laid off due to department closure.', 0),
+(15, 58, '2024-12-02', 'Moved to a new industry sector.', 1),
+(16, 4, '2019-08-27', 'Left following a disagreement with management.', 0),
+(17, 51, '2020-08-18', 'Accepted an offer from a competitor.', 1),
+(18, 31, '2019-05-01', 'Relocated to another city.', 0),
+(19, 48, '2017-07-08', 'Temporary contract expired.', 0),
+(20, 41, '2025-06-09', 'Exited due to health-related issues.', 0);
+SELECT * FROM turnover;
+
+-- 1.9 Audit Log Table
+CREATE TABLE audit_log (
+    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_id INT,
+    change_type VARCHAR(50),
+    change_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+);
+
+INSERT INTO audit_log (log_id, emp_id, change_type, change_time) VALUES
+(1, 92, 'Promotion', '2025-04-15 21:03:08'),
+(2, 43, 'Salary Updated', '2025-02-25 08:31:42'),
+(3, 18, 'Salary Updated', '2025-07-13 01:51:02'),
+(4, 37, 'Department Changed', '2025-03-27 18:30:56'),
+(5, 90, 'Salary Updated', '2025-03-29 18:54:04'),
+(6, 98, 'Promotion', '2025-07-11 02:15:44'),
+(7, 61, 'Department Changed', '2025-01-31 12:49:41'),
+(8, 79, 'Salary Updated', '2025-03-02 00:43:52'),
+(9, 11, 'Salary Updated', '2025-02-25 00:38:30'),
+(10, 33, 'Salary Updated', '2025-06-06 11:45:53'),
+(11, 20, 'Promotion', '2025-01-08 03:53:01'),
+(12, 94, 'Promotion', '2025-02-25 13:37:19'),
+(13, 68, 'Department Changed', '2025-01-26 02:10:14'),
+(14, 15, 'Department Changed', '2025-05-27 13:33:43'),
+(15, 31, 'Department Changed', '2025-02-01 13:43:11'),
+(16, 16, 'Salary Updated', '2025-06-09 10:01:50'),
+(17, 31, 'Department Changed', '2025-04-10 06:07:59'),
+(18, 82, 'Promotion', '2025-01-16 19:38:45'),
+(19, 59, 'Salary Updated', '2025-06-13 10:42:05'),
+(20, 15, 'Department Changed', '2025-04-26 21:24:45'),
+(21, 77, 'Promotion', '2025-06-16 15:41:16'),
+(22, 3, 'Promotion', '2025-01-29 10:39:42'),
+(23, 66, 'Promotion', '2025-03-02 01:41:37'),
+(24, 31, 'Promotion', '2025-02-28 19:34:02'),
+(25, 19, 'Department Changed', '2025-05-27 01:53:06'),
+(26, 55, 'Salary Updated', '2025-01-08 22:32:36'),
+(27, 79, 'Department Changed', '2025-02-13 11:45:31'),
+(28, 31, 'Promotion', '2025-01-19 05:44:29'),
+(29, 54, 'Salary Updated', '2025-03-05 02:31:45'),
+(30, 86, 'Promotion', '2025-03-07 10:13:17');
+
+-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-- 2. SAMPLE QUERIES
+
+-- 2.1 Top 3 performers by department
+SELECT 
+    e.first_name, e.last_name, d.dept_name, AVG(p.rating) AS avg_rating
+FROM employees e
+JOIN performance_reviews p ON e.emp_id = p.emp_id
+JOIN departments d ON e.dept_id = d.dept_id
+GROUP BY e.emp_id, d.dept_name
+ORDER BY avg_rating DESC
+LIMIT 3
+
+-- 2.2 Department with highest average salary
+SELECT 
+    d.dept_name, AVG(e.salary) AS avg_salary
+FROM employees e
+JOIN departments d ON e.dept_id = d.dept_id
+GROUP BY d.dept_name
+ORDER BY avg_salary DESC
+LIMIT 1;
+
+-- 2.3 Employee turnover greater than 5 years
+SELECT 
+    first_name, last_name, hire_date,
+    ROUND(DATEDIFF(CURDATE(), hire_date) / 365, 0) AS turnover_years
+FROM employees
+WHERE DATEDIFF(CURDATE(), hire_date) / 365 > 5;
+
+-- 2.4 Employees who worked on more than 2 projects
+SELECT 
+    emp_id, COUNT(project_id) AS project_count
+FROM employee_projects
+GROUP BY emp_id
+HAVING project_count > 1;
+
+-- 2.5 Monthly hiring trend
+SELECT 
+    MONTH(recruited_on) AS month, COUNT(*) AS hires
+FROM recruitment
+GROUP BY MONTH(recruited_on)
+ORDER BY month;
+
+-- =========================
+-- 3. TRIGGER EXAMPLE
+-- =========================
+
+DELIMITER //
+
+CREATE TRIGGER trg_salary_update
+AFTER UPDATE ON employees
+FOR EACH ROW
+BEGIN
+  IF OLD.salary <> NEW.salary THEN
+    INSERT INTO audit_log(emp_id, change_type)
+    VALUES (NEW.emp_id, 'Salary Updated');
+  END IF;
+END; //
+
+DELIMITER ;
+
+SELECT * FROM employees;
+
+-- =========================
+-- 4. VIEW FOR HR DASHBOARD
+-- =========================
+
+CREATE VIEW hr_summary AS
+SELECT 
+    d.dept_name,
+    COUNT(e.emp_id) AS total_employees,
+    AVG(e.salary) AS avg_salary,
+    SUM(CASE WHEN e.is_active THEN 1 ELSE 0 END) AS active_employees
+FROM employees e
+JOIN departments d ON e.dept_id = d.dept_id
+GROUP BY d.dept_name;
+
+-- =========================
+-- 5. PROCEDURE TO PROMOTE
+-- =========================
+
+DELIMITER //
+
+CREATE PROCEDURE promote_employee(IN empId INT, IN newSalary DECIMAL(10,2))
+BEGIN
+  UPDATE employees SET salary = newSalary WHERE emp_id = empId;
+
+  INSERT INTO salaries(emp_id, salary, updated_on)
+  VALUES (empId, newSalary, CURDATE());
+END;
+//
+
+DELIMITER ;
+
+
+
+
+
+
+
+
+
