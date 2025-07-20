@@ -19,11 +19,12 @@ SELECT * FROM student WHERE age > 16;
 -- <	Less than	WHERE age < 17
 -- >=	Greater than or equal to	WHERE age >= 16
 -- <=	Less than or equal to	WHERE age <= 18
--- BETWEEN	Within a range (inclusive)	WHERE age BETWEEN 15 AND 17
--- IN	Matches any in a list	WHERE grade IN ('10th', '12th')
--- NOT IN	Excludes list items	WHERE grade NOT IN ('9th', '11th')
--- LIKE	Pattern matching	WHERE name LIKE 'A%' (names starting with A)
--- NOT LIKE	Pattern not matching	WHERE name NOT LIKE '%a' (names not ending in a)
+
+-- BETWEEN	   Within a range (inclusive)	WHERE age BETWEEN 15 AND 17
+-- IN	       Matches any in a list	    WHERE grade IN ('10th', '12th')
+-- NOT IN	   Excludes list items	        WHERE grade NOT IN ('9th', '11th')
+-- LIKE	       Pattern matching	            WHERE name LIKE 'A%' (names starting with A)
+-- NOT LIKE	   Pattern not matching	        WHERE name NOT LIKE '%a' (names not ending in a)
 
 -- Handling NULL Values:
 
@@ -34,17 +35,19 @@ SELECT * FROM student WHERE age > 16;
 -- -- This will not work as expected
 -- SELECT * FROM student WHERE grade = NULL;
 
--- Correct Ways to Handle NULL
+-- Correct Ways to Handle NULL:
+
 -- Condition	Correct Syntax
--- Is NULL	WHERE grade IS NULL
+-- Is NULL	    WHERE grade IS NULL
 -- Is NOT NULL	WHERE grade IS NOT NULL
+
 -- Example: Select students with no grade assigned
--- SELECT * FROM student WHERE grade IS NULL;
+SELECT * FROM student WHERE grade IS NULL;
 
 -- Example: Select students who have a grade
 SELECT * FROM student WHERE grade IS NOT NULL;
 
--- Combining Conditions
+-- Combining Conditions:
 -- You can use AND, OR, and parentheses to combine conditions.
 
 -- Example: Students in 10th grade and older than 16
@@ -65,7 +68,7 @@ SELECT * FROM student ORDER BY age ASC;
 -- Sort by name in descending order:
 SELECT * FROM student ORDER BY name DESC;
 
--- Limiting Results with LIMIT
+-- Limiting Results with LIMIT:
 
 -- Get only 5 rows:
 SELECT * FROM student LIMIT 5;
